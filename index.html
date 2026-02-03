@@ -13,8 +13,14 @@
     Loading...
   </p>
 
-  <div id="links" style="margin-top: 30px; display: none;">
+  <div id="imageBox" style="margin-top:20px; display:none;">
+    <img id="licenseImg"
+         src=""
+         alt="Car License"
+         style="max-width:90%; border:1px solid #ccc;">
+  </div>
 
+  <div id="links" style="margin-top: 30px; display: none;">
     <h3>Quick Links</h3>
 
     <p>
@@ -24,13 +30,10 @@
     </p>
 
     <p>
-      📱 Social Media:
-      <br><br>
+      📱
       <a href="https://instagram.com/yourcompany" target="_blank">Instagram</a> |
-      <a href="https://facebook.com/yourcompany" target="_blank">Facebook</a> |
-      <a href="https://linkedin.com/company/yourcompany" target="_blank">LinkedIn</a>
+      <a href="https://facebook.com/yourcompany" target="_blank">Facebook</a>
     </p>
-
   </div>
 
   <script>
@@ -41,11 +44,19 @@
       .then(response => response.json())
       .then(data => {
         if (data[carId]) {
+
+          // Show license text
           document.getElementById("output").innerText =
             "License Number: " + data[carId].license;
 
-          // Show links only when car is found
+          // Show image
+          document.getElementById("licenseImg").src =
+            data[carId].image;
+          document.getElementById("imageBox").style.display = "block";
+
+          // Show links
           document.getElementById("links").style.display = "block";
+
         } else {
           document.getElementById("output").innerText =
             "Car ID not found";
