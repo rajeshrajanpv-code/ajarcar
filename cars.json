@@ -1,0 +1,12 @@
+{
+  "CAR0001": {
+    "license": "ABC1234",
+    "insurance": "insurance_abc1234.pdf",
+    "expiry": "2026-01-01"
+  },
+  "CAR0002": {
+    "license": "DEF5678",
+    "insurance": "insurance_def5678.pdf",
+    "expiry": "2026-01-01"
+  }
+}
