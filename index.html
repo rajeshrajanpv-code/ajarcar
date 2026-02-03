@@ -4,35 +4,31 @@
   <title>AjarCar - Vehicle Info</title>
   <meta charset="UTF-8">
 </head>
-<body style="font-family: Arial; text-align: center; margin-top: 50px;">
+<body style="font-family: Arial; text-align: center; margin-top: 40px;">
 
-  <h1>AJARCAR</h1>
-  <h2>Vehicle Information</h2>
+<h1>AjarCar</h1>
+<p id="output">Loading...</p>
 
-  <p id="licenseText" style="font-size:22px; color:green;"></p>
-  <p id="insuranceText"></p>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const carId = params.get("id");
 
-  <div style="margin-top:30px;">
-    <a href="https://instagram.com/yourcompany">Instagram</a> |
-    <a href="https://facebook.com/yourcompany">Facebook</a> |
-    <a href="https://ajarcar.com">Website</a>
-  </div>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const license = params.get("license");
-
-    if (license) {
-      document.getElementById("licenseText").innerText =
-        "Car License: " + license;
-
-      document.getElementById("insuranceText").innerText =
-        "Insurance: Available (Demo)";
-    } else {
-      document.getElementById("licenseText").innerText =
-        "No license received from NFC card";
-    }
-  </script>
+  fetch("cars.json")
+    .then(response => response.json())
+    .then(data => {
+      if (data[carId]) {
+        document.getElementById("output").innerText =
+          "License Number: " + data[carId].license;
+      } else {
+        document.getElementById("output").innerText =
+          "Car ID not found";
+      }
+    })
+    .catch(() => {
+      document.getElementById("output").innerText =
+        "Error loading data";
+    });
+</script>
 
 </body>
 </html>
