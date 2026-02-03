@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AjarCar - Vehicle Info</title>
+  <meta charset="UTF-8">
+</head>
+<body style="font-family: Arial; text-align: center; margin-top: 50px;">
+
+  <h1>AJARCAR</h1>
+  <h2>Vehicle Information</h2>
+
+  <p id="licenseText" style="font-size:22px; color:green;"></p>
+  <p id="insuranceText"></p>
+
+  <div style="margin-top:30px;">
+    <a href="https://instagram.com/yourcompany">Instagram</a> |
+    <a href="https://facebook.com/yourcompany">Facebook</a> |
+    <a href="https://ajarcar.com">Website</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const license = params.get("license");
+
+    if (license) {
+      document.getElementById("licenseText").innerText =
+        "Car License: " + license;
+
+      document.getElementById("insuranceText").innerText =
+        "Insurance: Available (Demo)";
+    } else {
+      document.getElementById("licenseText").innerText =
+        "No license received from NFC card";
+    }
+  </script>
+
+</body>
+</html>
