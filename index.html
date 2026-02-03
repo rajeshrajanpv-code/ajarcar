@@ -4,31 +4,58 @@
   <title>AjarCar - Vehicle Info</title>
   <meta charset="UTF-8">
 </head>
+
 <body style="font-family: Arial; text-align: center; margin-top: 40px;">
 
-<h1>AjarCar</h1>
-<p id="output">Loading...</p>
+  <h1>AjarCar</h1>
 
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const carId = params.get("id");
+  <p id="output" style="font-size: 22px; color: green;">
+    Loading...
+  </p>
 
-  fetch("cars.json")
-    .then(response => response.json())
-    .then(data => {
-      if (data[carId]) {
+  <div id="links" style="margin-top: 30px; display: none;">
+
+    <h3>Quick Links</h3>
+
+    <p>
+      🌐 <a href="https://enterprise.com.sa" target="_blank">
+        Visit Enterprise Website
+      </a>
+    </p>
+
+    <p>
+      📱 Social Media:
+      <br><br>
+      <a href="https://instagram.com/yourcompany" target="_blank">Instagram</a> |
+      <a href="https://facebook.com/yourcompany" target="_blank">Facebook</a> |
+      <a href="https://linkedin.com/company/yourcompany" target="_blank">LinkedIn</a>
+    </p>
+
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const carId = params.get("id");
+
+    fetch("cars.json")
+      .then(response => response.json())
+      .then(data => {
+        if (data[carId]) {
+          document.getElementById("output").innerText =
+            "License Number: " + data[carId].license;
+
+          // Show links only when car is found
+          document.getElementById("links").style.display = "block";
+        } else {
+          document.getElementById("output").innerText =
+            "Car ID not found";
+        }
+      })
+      .catch(() => {
         document.getElementById("output").innerText =
-          "License Number: " + data[carId].license;
-      } else {
-        document.getElementById("output").innerText =
-          "Car ID not found";
-      }
-    })
-    .catch(() => {
-      document.getElementById("output").innerText =
-        "Error loading data";
-    });
-</script>
+          "Error loading data";
+      });
+  </script>
 
 </body>
 </html>
